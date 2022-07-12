@@ -6,6 +6,7 @@ import './App.css';
 
 function App() {
   const { pokemons } = usePokemonList();
+  console.log('🚀 ~ file: App.js ~ line 10 ~ App ~ pokemons', pokemons);
   return (
     <div className="App">
       <Col span={4} offset={10} className="App_logo">
