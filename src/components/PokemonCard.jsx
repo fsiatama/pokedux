@@ -2,16 +2,17 @@ import React from 'react';
 import { Card } from 'antd';
 import { StarOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
+import usePokemonCard from './customHooks/usePokemonCard';
 
 const PokemonCard = ({ pokemon }) => {
-  const { name, url } = pokemon;
+  const { name, image, description } = usePokemonCard({ pokemon });
   return (
     <Card
       title={name}
-      cover={<img src={url} alt={name} />}
+      cover={<img src={image} alt={name} />}
       extra={<StarOutlined />}
     >
-      <Meta description="Fire, Metal" />
+      <Meta description={description} />
     </Card>
   );
 };
