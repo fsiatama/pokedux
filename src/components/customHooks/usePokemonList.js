@@ -9,8 +9,8 @@ const usePokemonList = () => {
 
   useEffect(() => {
     const fetchPokemons = async () => {
-      const pok = await getPokemons();
-      dispatch(setPokemonsActions(pok));
+      const pokemonsRest = await getPokemons();
+      dispatch(setPokemonsActions(pokemonsRest));
     };
     fetchPokemons();
   }, [dispatch]);
