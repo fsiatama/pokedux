@@ -1,31 +1,22 @@
 import axios from 'axios';
 
-export const getPokemons = () => {
-  return (
-    axios
-      .get('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
-      .then(res => {
-        const { results } = res.data;
-        return results;
-      })
-      // .then(async pokemons => {
-      //   const dataArr = await pokemons.reduce(async (accum, pokemon) => {
-      //     const { name, url } = pokemon;
-      //     const data = await axios.get(url);
-      //     const { sprites } = data.data;
+export const getPokemons = async () => {
+  try {
+    const res = await axios.get(
+      'https://pokeapi.co/api/v2/pokemon?limit=151&offset=0',
+    );
+    const { results } = res.data;
+    return results;
+  } catch (err) {
+    return console.log(err);
+  }
+};
 
-      //     const item = {
-      //       name,
-      //       url: sprites.other['official-artwork'].front_default,
-      //     };
-
-      //     return [...accum, item];
-      //   }, []);
-
-      //   console.log(dataArr);
-
-      //   return dataArr;
-      // })
-      .catch(err => console.log(err))
-  );
+export const getPokemonsDetails = async pokemon => {
+  try {
+    const res = await axios.get(pokemon.url);
+    return res.data;
+  } catch (err) {
+    return console.log(err);
+  }
 };
