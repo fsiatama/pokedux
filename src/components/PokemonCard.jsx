@@ -1,16 +1,23 @@
 import React from 'react';
 import { Card } from 'antd';
-import { StarOutlined } from '@ant-design/icons';
+
 import Meta from 'antd/lib/card/Meta';
 import usePokemonCard from './customHooks/usePokemonCard';
+import FavoriteButton from './FavoriteButton';
 
 const PokemonCard = ({ pokemon }) => {
-  const { name, image, description } = usePokemonCard({ pokemon });
+  const { name, image, description, favorite, handleOnFavorite } =
+    usePokemonCard({
+      pokemon,
+    });
+
   return (
     <Card
       title={name}
       cover={<img src={image} alt={name} />}
-      extra={<StarOutlined />}
+      extra={
+        <FavoriteButton isFavorite={favorite} onClick={handleOnFavorite} />
+      }
     >
       <Meta description={description} />
     </Card>
