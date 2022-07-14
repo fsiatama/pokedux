@@ -1,11 +1,11 @@
-import { Col } from 'antd';
+import { Col, Spin, Space } from 'antd';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
 import usePokemonList from './components/customHooks/usePokemonList';
 import './App.css';
 
 function App() {
-  const { pokemons } = usePokemonList();
+  const { pokemons, loading } = usePokemonList();
   return (
     <div className="App">
       <Col span={4} offset={10} className="App_logo">
@@ -17,6 +17,9 @@ function App() {
       <Col span={8} offset={8}>
         <Searcher />
       </Col>
+      <Space size={48} direction="vertical">
+        <Spin spinning={loading} size="large" />
+      </Space>
       <Col span={20} offset={2}>
         <PokemonList pokemons={pokemons} />
       </Col>
