@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setFavorite } from '../../actions';
+import { setFavorite } from '../../slices/dataSlice';
 
 const usePokemonCard = ({ pokemon }) => {
   const dispatch = useDispatch();

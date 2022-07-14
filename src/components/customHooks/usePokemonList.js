@@ -1,24 +1,24 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons } from '../../services';
-import { getPokemonsWithDetails, setLoading } from '../../actions';
-
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import {
+  fetchPokemonsWithDetails,
+  setFilteredPokemons,
+} from '../../slices/dataSlice';
 const usePokemonList = () => {
-  const pokemons = useSelector(state => state.pokemons);
-  const loading = useSelector(state => state.loading);
+  const pokemons = useSelector(
+    state => state.data.filteredPokemons,
+    shallowEqual,
+  );
+  const loading = useSelector(state => state.ui.loading);
   const dispatch = useDispatch();
 
+  const onSearch = value => dispatch(setFilteredPokemons(value));
+
   useEffect(() => {
-    const fetchPokemons = async () => {
-      dispatch(setLoading(true));
-      const pokemonsRest = await getPokemons();
-      dispatch(getPokemonsWithDetails(pokemonsRest));
-      dispatch(setLoading(false));
-    };
-    fetchPokemons();
+    dispatch(fetchPokemonsWithDetails());
   }, [dispatch]);
 
-  return { pokemons, loading };
+  return { pokemons, loading, onSearch };
 };
 
 export default usePokemonList;
